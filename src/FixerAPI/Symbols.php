@@ -1,20 +1,27 @@
 <?php
 namespace InfiniWeb\FixerAPI;
 
-class Symbols extends Fixer
+final class Symbols
 {
 
 	protected $endpointKey = 'symbols';
 
-	protected $symbols;
+	protected $fixer;
 
-	public function __construct($accessKey)
+	public function __construct(Fixer $fixer)
 	{
-		parent::__construct($accessKey);
+		$this->fixer = $fixer;
 	}
 
-	protected function loadSymbols()
+	public function get()
 	{
-		
+		$response = $this->fixer->getResponse($this->endpointKey);
+
+		if (!isset($response->symbols)) {
+			throw new Exception("Error Processing Request", 1);
+		}
+
+		return $response->symbols;
 	}
+
 }

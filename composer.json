@@ -15,11 +15,12 @@
   },
   "autoload": {
     "psr-4": {
-      "InfiniWeb\\FixerAPI\\": "FixerAPI"
+      "InfiniWeb\\FixerAPI\\": "src/FixerAPI"
     }
   },
   "require": {
-    "php": ">=7.0.0"
+    "php": ">=7.0.0",
+    "php-curl-class/php-curl-class": "dev-master"
   },
   "minimum-stability": "dev"
 }

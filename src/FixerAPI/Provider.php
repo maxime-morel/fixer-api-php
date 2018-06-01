@@ -1,6 +1,8 @@
 <?php
 namespace InfiniWeb\FixerAPI;
 
+use \Curl\Curl;
+
 class Provider
 {
 
@@ -14,37 +16,18 @@ class Provider
 	public function getResponse($endpoint, $data, $method = 'GET')
     {
 
-        $accessToken = $this->getAccessToken();
+        $url = $endpoint . "?access_key=" . $this->accessKey;
 
-        $body = http_build_query($data);
+        $curl = new Curl();
+        $curl->get($url);
 
-        try {
-            
-            $request = $provider->getAuthenticatedRequest(
-                $method,
-                $this->settings->getApiUrl() . $endpoint,
-                $accessToken,
-                [
-                    'body' => $body,
-                    'headers' => [
-                        'content-type' => 'application/x-www-form-urlencoded'
-                    ]
-                ]
-            );
-
-            $response = $provider->getResponse($request);
-
-        } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
-            $errorInfo = $e->getResponseBody();
-            $this->lastErrorMessage = $errorInfo['error_description'];
+        if ($curl->error) {
+            //echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
             return false;
-        } catch (\Exception $exp){
-            $errorInfo = $exp->getMessage();
-            $this->lastErrorMessage = $errorInfo;
-            return false;
+        } else {
+            return $curl->response;
         }
 
-        return $response ;
     }
 
     public function getAuthenticatedRequest()
