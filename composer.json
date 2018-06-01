@@ -1,0 +1,25 @@
+{
+  "name": "infiniweb/fixerAPI-php",
+  "description": "FixerAPI in PHP (https://fixer.io)",
+  "type": "library",
+  "version": "1.0.0",
+  "keywords": ["currency", "currencies", "rates", "conversion", "fluctuation"],
+  "authors": [
+    {
+      "name": "Maxime Morel-Bailly",
+      "email": "17177824+infiniweb@users.noreply.github.com"
+    }
+  ],
+  "config": {
+    "vendor-dir": "vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "InfiniWeb\\FixerAPI\\": "FixerAPI"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "minimum-stability": "dev"
+}
