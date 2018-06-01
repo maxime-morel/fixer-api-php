@@ -13,10 +13,14 @@ class Provider
 		$this->accessKey = $accessKey;
 	}
 
-	public function getResponse($endpoint, $data, $method = 'GET')
+	public function getResponse($endpoint, $data = [], $method = 'GET')
     {
 
         $url = $endpoint . "?access_key=" . $this->accessKey;
+
+        if (!empty($data)) {
+            $url .= "&" . http_build_query($data);
+        }
 
         $curl = new Curl();
         $curl->get($url);
