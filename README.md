@@ -28,12 +28,9 @@ Once included to your project, instanciate the Fixer class:
 
     $fixer = new \InfiniWeb\FixerAPI\Fixer();
 
-And provide the Fixer API information:
+And provide the Fixer API Key:
 
-    $apiKey = "{yourAPiKey}";
-    $baseUrl = "http://data.fixer.io/api/";
     $fixer->setAccessKey($apiKey);
-    $fixer->setBaseUrl($baseUrl);
 
 You are now ready to consume the API!
 
