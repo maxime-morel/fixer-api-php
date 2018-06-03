@@ -37,7 +37,15 @@ final class Rates
         return array('timestamp' => $response->timestamp, 'base' => $response->base, 'rates' => (array)$response->rates);
     }
 
-    public function prepareData($baseCurrency = null, $symbols = [], $startDate = null, $endDate = null)
+    /**
+     * Prepare rates options
+     * @param  string|null $baseCurrency the three-letter currency code of the base currency.
+     * @param  array $symbols list of comma-separated currency codes to limit output currencies.
+     * @param  string|null $startDate the series start date
+     * @param  string|null $endDate the series end date
+     * @return array
+     */
+    private function prepareData($baseCurrency, $symbols, $startDate = null, $endDate = null)
     {
         $data = array();
 
@@ -60,11 +68,45 @@ final class Rates
         return $data;
     }
 
+    /**
+     * Get Time-series daily rates
+     * @param  string $startDate the series start date
+     * @param  string $endDate the series end date
+     * @param  string|null $baseCurrency the three-letter currency code of the base currency.
+     * @param  array $symbols list of comma-separated currency codes to limit output currencies.
+     * @return array
+     */
     public function getDailyRates($startDate, $endDate, $baseCurrency = null, $symbols = [])
     {
-        $data = $this->prepareData($baseCurrency, $symbols, $startDate, $endDate);
-
         $endPoint = "timeseries";
+        return $this->getSeries($endPoint, $startDate, $endDate, $baseCurrency, $symbols);
+    }
+
+    /**
+     * Get daily fluctuation rates
+     * @param  string $startDate the series start date
+     * @param  string $endDate the series end date
+     * @param  string|null $baseCurrency the three-letter currency code of the base currency.
+     * @param  array $symbols list of comma-separated currency codes to limit output currencies.
+     * @return array
+     */
+    public function getDailyFluctuation($startDate, $endDate, $baseCurrency = null, $symbols = [])
+    {
+        $endPoint = "fluctuation";
+        return $this->getSeries($endPoint, $startDate, $endDate, $baseCurrency, $symbols);
+    }
+    
+    /**
+     * Prepare and get series request
+     * @param  string $startDate the series start date
+     * @param  string $endDate the series end date
+     * @param  string|null $baseCurrency the three-letter currency code of the base currency.
+     * @param  array $symbols list of comma-separated currency codes to limit output currencies.
+     * @return array
+     */
+    private function getSeries($endPoint, $startDate, $endDate, $baseCurrency, $symbols)
+    {
+        $data = $this->prepareData($baseCurrency, $symbols, $startDate, $endDate);
 
         $response = $this->fixer->getResponse($endPoint, $data);
 
@@ -74,5 +116,4 @@ final class Rates
 
         return array('base' => $response->base, 'rates' => (array)$response->rates);
     }
-    
 }

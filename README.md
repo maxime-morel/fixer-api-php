@@ -108,6 +108,36 @@ You can get daily rates from a starting end an end date, using:
                 ...
 
 
+### Fluctuations
+
+The parameters to retrieve the fluctuations are exactly the same then the time-series rates.
+
+    $return = $fixer->rates->getDailyFluctuation("2018-05-01", "2018-05-03", $baseCurrency, $symbols);
+
+You will then get the daily flactuations for each currencies from the start to end date:
+
+    Array
+    (
+        [base] => EUR
+        [rates] => Array
+            (
+                [USD] => stdClass Object
+                    (
+                        [start_rate] => 1.199468
+                        [end_rate] => 1.199326
+                        [change] => -0.0001
+                        [change_pct] => -0.0118
+                    )
+                [GBP] => stdClass Object
+                    (
+                        [start_rate] => 0.881297
+                        [end_rate] => 0.883748
+                        [change] => 0.0025
+                        [change_pct] => 0.2781
+                    )
+            )
+    )
+
 ### Convert
 
 You can request the conversion from a currency to another. If you provide a date, it will return an historical rate.
