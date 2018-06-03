@@ -102,7 +102,14 @@ class Fixer
 				$code = (int)$response->error->code;
 			}
 
+			if (isset($response->error) && isset($response->error->type)) {
+				$message = $response->error->type;
+			}
+
 			if (isset($response->error) && isset($response->error->info)) {
+				if (!empty($message)) {
+					$message .= " - ";
+				}
 				$message = $response->error->info;
 			}
 
