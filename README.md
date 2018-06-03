@@ -87,8 +87,8 @@ You will receive the following array:
 
     Array
     (
-        [timestamp] => 1528014248
-        [rate] => 1.17
-        [result] => 29.17
+        [timestamp] => 1516406399
+        [rate] => 1.222637
+        [result] => 30.565925
     )
 

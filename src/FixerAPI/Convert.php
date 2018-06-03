@@ -35,7 +35,7 @@ final class Convert
 
         $response = $this->fixer->getResponse($this->endpointKey, $data);
 
-        if (!isset($response->rates)) {
+        if (!isset($response->result)) {
             throw new \Exception("Error Processing Request", 1);
         }
 
