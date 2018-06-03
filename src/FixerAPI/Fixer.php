@@ -28,10 +28,17 @@ class Fixer
 	 */
 	public $rates;
 
+	/**
+	 * Object managing currencies conversion
+	 * @var Convert
+	 */
+	public $convert;
+
 	public function __construct()
 	{
 		$this->symbols = new Symbols($this);
 		$this->rates = new Rates($this);
+		$this->convert = new Convert($this);
 	}
 
 	/**

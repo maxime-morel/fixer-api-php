@@ -13,6 +13,10 @@ final class Symbols
 		$this->fixer = $fixer;
 	}
 
+	/**
+	 * Returning all available currencies.
+	 * @return Object list of currencies with iso code and full currency name
+	 */
 	public function get()
 	{
 		$response = $this->fixer->getResponse($this->endpointKey);

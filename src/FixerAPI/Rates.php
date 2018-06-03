@@ -22,7 +22,6 @@ final class Rates
 	 */
 	public function get($baseCurrency = null, $symbols = [])
 	{
-
 		$data = array();
 
 		if ($baseCurrency !== null) {
