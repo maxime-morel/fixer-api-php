@@ -1,38 +1,38 @@
 # PHP wrapper for Fixer API
 
-This API wrapper provide a simple way to access to [fixer.io API](https://fixer.io/documentation) in order to easily consume Fixer endpoints.
+This API wrapper provides a simple way to access [fixer.io API](https://fixer.io/documentation) in order to easily consume the endpoints with a PHP application.
 
 ---
 
-- [Installation](#installation): Retrieve the list of currencies supported by Fixer
-- [QuickStart](#quick-start): Retrieve the list of currencies supported by Fixer
+- [Installation](#installation)
+- [QuickStart](#quick-start)
 
 
-We are supporting multiple endpoints
+We are supporting multiple endpoints:
 
-- [/symbols](#symbols): Retrieve the list of currencies supported by Fixer
-- [/latest (Rates)](#rates): Return real-time exchange rate data
-- [/convert](#convert): Return real-time exchange rate data
+- [symbols](#symbols): Retrieve the list of currencies supported by Fixer
+- [rates](#rates): Return real-time exchange rate data AND historical data
+- [convert](#convert): Return real-time exchange rate data
 
 ---
 
 ### Installation
 
-The package can be included with composer:
+You can use composer to include this package to your project:
 
     composer require infiniweb/fixer-api-php
 
 ### Quick Start
 
-You need to get your free API Key [here https://fixer.io/product](https://fixer.io/product)
-
-Once included to your project, instanciate the Fixer class:
+You will need first to instanciate the Fixer class:
 
     $fixer = new \InfiniWeb\FixerAPI\Fixer();
 
 And provide the Fixer API Key:
 
     $fixer->setAccessKey($apiKey);
+
+Make sure to first get your Free or paid API Key [here https://fixer.io/product](https://fixer.io/product)
 
 You are now ready to consume the API!
 
@@ -65,13 +65,18 @@ This will return the rates of provided currencies compared to the base currency.
     (
         [timestamp] => 1528014248
         [base] => EUR
-        [rates] => stdClass Object
+        [rates] => Array
             (
                 [USD] => 1.166583
                 [GBP] => 0.874168
             )
     )
 
+You could also retrive historical rate data by including the date in the request, such as:
+
+    $fixer->rates->get($baseCurrency, $symbols, "2018-01-19");
+
+Note that the date needs to be following this format: `YYYY-MM-DD`
 
 ### Convert
 
@@ -91,4 +96,3 @@ You will receive the following array:
         [rate] => 1.222637
         [result] => 30.565925
     )
-

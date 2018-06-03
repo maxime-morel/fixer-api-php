@@ -8,7 +8,7 @@ class Fixer
      * The API base URL
      * @var string
      */
-    private $baseUrl = "http://data.fixer.io/api/";
+    private $baseUrl = "https://data.fixer.io/api/";
 
     /**
      * The API provider for GET operations

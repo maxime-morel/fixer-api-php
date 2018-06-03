@@ -18,9 +18,10 @@ final class Rates
      * Based on subscription
      * @param  string|null $baseCurrency the three-letter currency code of the base currency.
      * @param  array $symbols list of comma-separated currency codes to limit output currencies.
+     * @param  string $date To retrive the historical value, format YYYY-MM-DD
      * @return array
      */
-    public function get($baseCurrency = null, $symbols = [])
+    public function get($baseCurrency = null, $symbols = [], $date = null)
     {
         $data = array();
 
@@ -32,13 +33,15 @@ final class Rates
             $data['symbols'] = implode(",", $symbols);
         }
 
-        $response = $this->fixer->getResponse($this->endpointKey, $data);
+        $endPoint = $date !== null ? $date : $this->endpointKey;
+
+        $response = $this->fixer->getResponse($endPoint, $data);
 
         if (!isset($response->rates)) {
             throw new \Exception("Error Processing Request", 1);
         }
 
-        return array('timestamp' => $response->timestamp, 'base' => $response->base, 'rates' => $response->rates);
+        return array('timestamp' => $response->timestamp, 'base' => $response->base, 'rates' => (array)$response->rates);
     }
     
 }
