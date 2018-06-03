@@ -1,5 +1,5 @@
 {
-  "name": "infiniweb/fixerAPI-php",
+  "name": "infiniweb/fixer-api-php",
   "description": "PHP API wrapper for Fixer.io foreign exchange rates and currency conversion JSON API",
   "type": "library",
   "version": "1.0.0",
