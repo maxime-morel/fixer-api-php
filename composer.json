@@ -1,6 +1,6 @@
 {
   "name": "infiniweb/fixerAPI-php",
-  "description": "FixerAPI in PHP (https://fixer.io)",
+  "description": "PHP API wrapper for Fixer.io foreign exchange rates and currency conversion JSON API",
   "type": "library",
   "version": "1.0.0",
   "keywords": ["currency", "currencies", "rates", "conversion", "fluctuation"],
@@ -19,7 +19,7 @@
     }
   },
   "require": {
-    "php": ">=7.0.0",
+    "php": "^7.0",
     "php-curl-class/php-curl-class": "dev-master"
   },
   "minimum-stability": "dev"
