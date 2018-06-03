@@ -6,14 +6,14 @@ use \Curl\Curl;
 class Provider
 {
 
-	private $accessKey;
+    private $accessKey;
 
-	public function __construct($accessKey)
-	{
-		$this->accessKey = $accessKey;
-	}
+    public function __construct($accessKey)
+    {
+        $this->accessKey = $accessKey;
+    }
 
-	public function getResponse($endpoint, $data = [], $method = 'GET')
+    public function getResponse($endpoint, $data = [], $method = 'GET')
     {
 
         $url = $endpoint . "?access_key=" . $this->accessKey;

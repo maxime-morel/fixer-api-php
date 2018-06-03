@@ -4,67 +4,67 @@ namespace InfiniWeb\FixerAPI;
 class Fixer
 {
 
-	/**
-	 * The API base URL
-	 * @var string
-	 */
-	private $baseUrl;
+    /**
+     * The API base URL
+     * @var string
+     */
+    private $baseUrl;
 
-	/**
-	 * The API provider for GET operations
-	 * @var Provider
-	 */
-	private $provider;
+    /**
+     * The API provider for GET operations
+     * @var Provider
+     */
+    private $provider;
 
-	/**
-	 * Object managing the currency list (ISO code and currency name)
-	 * @var Symbols
-	 */
-	public $symbols;
+    /**
+     * Object managing the currency list (ISO code and currency name)
+     * @var Symbols
+     */
+    public $symbols;
 
-	/**
-	 * Object managing the currency rates
-	 * @var Rates
-	 */
-	public $rates;
+    /**
+     * Object managing the currency rates
+     * @var Rates
+     */
+    public $rates;
 
-	/**
-	 * Object managing currencies conversion
-	 * @var Convert
-	 */
-	public $convert;
+    /**
+     * Object managing currencies conversion
+     * @var Convert
+     */
+    public $convert;
 
-	public function __construct()
-	{
-		$this->symbols = new Symbols($this);
-		$this->rates = new Rates($this);
-		$this->convert = new Convert($this);
-	}
+    public function __construct()
+    {
+        $this->symbols = new Symbols($this);
+        $this->rates = new Rates($this);
+        $this->convert = new Convert($this);
+    }
 
-	/**
-	 * Set the API access key
-	 * @param string $accessKey Access Key provided by fixer.io
-	 */
-	public function setAccessKey($accessKey)
-	{
-		$this->accessKey = $accessKey;
-	}
+    /**
+     * Set the API access key
+     * @param string $accessKey Access Key provided by fixer.io
+     */
+    public function setAccessKey($accessKey)
+    {
+        $this->accessKey = $accessKey;
+    }
 
-	/**
-	 * Set the base URL of the API.
-	 * It will be used to compose the API endpoint
-	 * @param string $baseUrl the API base URL
-	 */
-	public function setBaseUrl($baseUrl)
-	{
-		$this->baseUrl = $baseUrl;
-	}
+    /**
+     * Set the base URL of the API.
+     * It will be used to compose the API endpoint
+     * @param string $baseUrl the API base URL
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+    }
 
-	/**
-	 * Get the request provider for formatted and authenticated requests
-	 * @return Provider
-	 */
-	protected function getProvider()
+    /**
+     * Get the request provider for formatted and authenticated requests
+     * @return Provider
+     */
+    protected function getProvider()
     {
         if ($this->provider) {
             return $this->provider;
@@ -83,9 +83,9 @@ class Fixer
      */
     public function getResponse($endpointKey, $params = [])
     {
-    	$endpoint = $this->baseUrl . $endpointKey;
-    	$provider = $this->getProvider();
-    	return $this->checkResponse($provider->getResponse($endpoint, $params));
+        $endpoint = $this->baseUrl . $endpointKey;
+        $provider = $this->getProvider();
+        return $this->checkResponse($provider->getResponse($endpoint, $params));
     }
 
     /**
@@ -96,34 +96,34 @@ class Fixer
      */
     public function checkResponse($response)
     {
-    	if (!$response) {
-    		throw new \Exception("Error Processing Request", 1);
-    	}
+        if (!$response) {
+            throw new \Exception("Error Processing Request", 1);
+        }
 
-		if (!isset($response->success) || empty($response->success)) {
+        if (!isset($response->success) || empty($response->success)) {
 
-			$code = 0;
-			$message = "";
+            $code = 0;
+            $message = "";
 
-			if (isset($response->error) && isset($response->error->code)) {
-				$code = (int)$response->error->code;
-			}
+            if (isset($response->error) && isset($response->error->code)) {
+                $code = (int)$response->error->code;
+            }
 
-			if (isset($response->error) && isset($response->error->type)) {
-				$message = $response->error->type;
-			}
+            if (isset($response->error) && isset($response->error->type)) {
+                $message = $response->error->type;
+            }
 
-			if (isset($response->error) && isset($response->error->info)) {
-				if (!empty($message)) {
-					$message .= " - ";
-				}
-				$message = $response->error->info;
-			}
+            if (isset($response->error) && isset($response->error->info)) {
+                if (!empty($message)) {
+                    $message .= " - ";
+                }
+                $message = $response->error->info;
+            }
 
-			throw new \Exception($message, $code);
-		}
+            throw new \Exception($message, $code);
+        }
 
-		return $response;
+        return $response;
     }
 
 }
