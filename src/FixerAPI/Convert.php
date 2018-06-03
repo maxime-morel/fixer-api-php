@@ -13,6 +13,14 @@ final class Convert
 		$this->fixer = $fixer;
 	}
 
+	/**
+	 * Convert the specified amount from a currency to another
+	 * @param  string $from   ISO currency code of the provided amount
+	 * @param  string $to     ISO Currency code to convert to
+	 * @param  float $amount  The amount to be converted
+	 * @param  null|string $date   At the format YYYY-MM-DD, if provided, get the conversion at the specified date
+	 * @return array         The converted amount with the associated rate and timestamp
+	 */
 	public function get($from, $to, $amount, $date = null)
 	{
 		$data = array();

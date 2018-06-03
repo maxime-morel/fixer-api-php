@@ -18,7 +18,7 @@ final class Rates
 	 * Based on subscription
 	 * @param  string|null $baseCurrency the three-letter currency code of the base currency.
 	 * @param  array $symbols list of comma-separated currency codes to limit output currencies.
-	 * @return Object
+	 * @return array
 	 */
 	public function get($baseCurrency = null, $symbols = [])
 	{

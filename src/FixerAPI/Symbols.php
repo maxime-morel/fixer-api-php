@@ -15,7 +15,7 @@ final class Symbols
 
 	/**
 	 * Returning all available currencies.
-	 * @return Object list of currencies with iso code and full currency name
+	 * @return array list of currencies with iso code and full currency name
 	 */
 	public function get()
 	{
@@ -25,7 +25,7 @@ final class Symbols
 			throw new Exception("Error Processing Request", 1);
 		}
 
-		return $response->symbols;
+		return (array)$response->symbols;
 	}
 
 }

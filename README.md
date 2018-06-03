@@ -43,9 +43,9 @@ To get the list of Symbols, simply use the following:
 
     $symbols = $fixer->symbols->get();
 
-This will return a list of symbols (ISO 4217 Currency Code) as a simple object:
+This will return a list of symbols (ISO 4217 Currency Code) as a simple array:
 
-    stdClass Object
+    Array
     (
         [AED] => United Arab Emirates Dirham
         [AFN] => Afghan Afghani
