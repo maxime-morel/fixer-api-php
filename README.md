@@ -18,7 +18,9 @@ We are supporting multiple endpoints
 
 ### Installation
 
-The package will be soon available with composer.
+The package can be included with composer:
+
+    composer require infiniweb/fixer-api-php
 
 ### Quick Start
 
