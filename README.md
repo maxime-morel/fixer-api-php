@@ -4,11 +4,15 @@ This API wrapper provide a simple way to access to [fixer.io API](https://fixer.
 
 ---
 
+- [Installation](#installation): Retrieve the list of currencies supported by Fixer
+- [QuickStart](#quick-start): Retrieve the list of currencies supported by Fixer
+
+
 We are supporting multiple endpoints
 
-- [/symbols](#Symbols): Retrieve the list of currencies supported by Fixer
-- [/latest (Rates)](#Rates):  Return real-time exchange rate data
-- [/convert](#Convert):  Return real-time exchange rate data
+- [/symbols](#symbols): Retrieve the list of currencies supported by Fixer
+- [/latest (Rates)](#rates): Return real-time exchange rate data
+- [/convert](#convert): Return real-time exchange rate data
 
 ---
 
