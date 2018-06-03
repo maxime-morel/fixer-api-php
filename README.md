@@ -126,3 +126,13 @@ You will receive the following array:
         [rate] => 1.222637
         [result] => 30.565925
     )
+
+### Additional features
+
+#### SSL support
+
+All paid subscription plans available on Fixer.io come with 256-bit SSL encryption. You can enable SSL support by providing extra information in the class constructor:
+
+    $config = array('ssl' => true);
+    $fixer = new \InfiniWeb\FixerAPI\Fixer($config);
+

@@ -8,7 +8,7 @@ class Fixer
      * The API base URL
      * @var string
      */
-    private $baseUrl = "https://data.fixer.io/api/";
+    private $baseUrl = "data.fixer.io/api/";
 
     /**
      * The API provider for GET operations
@@ -34,11 +34,18 @@ class Fixer
      */
     public $convert;
 
-    public function __construct()
+    public function __construct($config = [])
     {
         $this->symbols = new Symbols($this);
         $this->rates = new Rates($this);
         $this->convert = new Convert($this);
+
+        $this->setConfig($config);
+    }
+
+    protected function setConfig($config)
+    {
+        $this->baseUrl = isset($config['ssl']) && $config['ssl'] ? "https://".$this->baseUrl : "http://".$this->baseUrl;
     }
 
     /**
@@ -51,9 +58,8 @@ class Fixer
     }
 
     /**
-     * Set the base URL of the API.
-     * It will be used to compose the API endpoint
-     * @param string $baseUrl the API base URL
+     * Override the base URL of the API.
+     * @param string $baseUrl
      */
     public function setBaseUrl($baseUrl)
     {
