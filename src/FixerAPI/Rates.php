@@ -23,6 +23,22 @@ final class Rates
      */
     public function get($baseCurrency = null, $symbols = [], $date = null)
     {
+        $data = $this->prepareData($baseCurrency, $symbols);
+
+        // If a date is provided, we will get the historical data, the endpoint needs to be changed accordingly
+        $endPoint = $date !== null ? $date : $this->endpointKey;
+
+        $response = $this->fixer->getResponse($endPoint, $data);
+
+        if (!isset($response->rates)) {
+            throw new \Exception("Error Processing Request", 1);
+        }
+
+        return array('timestamp' => $response->timestamp, 'base' => $response->base, 'rates' => (array)$response->rates);
+    }
+
+    public function prepareData($baseCurrency = null, $symbols = [], $startDate = null, $endDate = null)
+    {
         $data = array();
 
         if ($baseCurrency !== null) {
@@ -33,7 +49,22 @@ final class Rates
             $data['symbols'] = implode(",", $symbols);
         }
 
-        $endPoint = $date !== null ? $date : $this->endpointKey;
+        if ($startDate !== null) {
+            $data['start_date'] = $startDate;
+        }
+
+        if ($endDate !== null) {
+            $data['end_date'] = $endDate;
+        }
+
+        return $data;
+    }
+
+    public function getDailyRates($startDate, $endDate, $baseCurrency = null, $symbols = [])
+    {
+        $data = $this->prepareData($baseCurrency, $symbols, $startDate, $endDate);
+
+        $endPoint = "timeseries";
 
         $response = $this->fixer->getResponse($endPoint, $data);
 
@@ -41,7 +72,7 @@ final class Rates
             throw new \Exception("Error Processing Request", 1);
         }
 
-        return array('timestamp' => $response->timestamp, 'base' => $response->base, 'rates' => (array)$response->rates);
+        return array('base' => $response->base, 'rates' => (array)$response->rates);
     }
     
 }

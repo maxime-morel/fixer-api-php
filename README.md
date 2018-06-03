@@ -53,6 +53,10 @@ This will return a list of symbols (ISO 4217 Currency Code) as a simple array:
 
 ### Rates
 
+The are various ways to get rates. It can be real-time data, historical data or series data (from a date to another date)
+
+#### Real-time rates
+
 You can get the latest rates for all or for specific currencies:
 
     $baseCurrency = "EUR";
@@ -72,11 +76,37 @@ This will return the rates of provided currencies compared to the base currency.
             )
     )
 
+#### Historical rates
+
 You could also retrive historical rate data by including the date in the request, such as:
 
     $fixer->rates->get($baseCurrency, $symbols, "2018-01-19");
 
 Note that the date needs to be following this format: `YYYY-MM-DD`
+
+#### Time-series rates
+
+You can get daily rates from a starting end an end date, using:
+
+    $return = $fixer->rates->getDailyRates("2018-05-01", "2018-05-03", $baseCurrency, $symbols);
+
+    Array
+    (
+        [base] => EUR
+        [rates] => Array
+            (
+                [2018-05-01] => stdClass Object
+                    (
+                        [USD] => 1.199468
+                        [GBP] => 0.881297
+                    )
+                [2018-05-02] => stdClass Object
+                    (
+                        [USD] => 1.195602
+                        [GBP] => 0.880967
+                    )
+                ...
+
 
 ### Convert
 
